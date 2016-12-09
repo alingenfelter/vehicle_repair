@@ -1,0 +1,304 @@
+{
+  "vehicles": [
+    {
+      "id": "V1",
+      "name": "Lucy",
+      "make": "Ford",
+      "model": "Mustang",
+      "trim": "coup",
+      "engine": "289",
+      "year": "1965",
+      "description": "4 barrell 289. C vin.",
+      "annual_mileage": "1000",
+      "mileage": "130500"
+    },
+    {
+      "id": "V3",
+      "name": "PITA",
+      "make": "Bayliner",
+      "model": "Bayliner",
+      "trim": "",
+      "engine": "v6",
+      "year": "1999",
+      "description": "19ft bayliner, inboard. Engine from small pickup",
+      "annual_mileage": "1000",
+      "mileage": "4000"
+    },
+    {
+      "name": "Lucille",
+      "make": "Ford",
+      "model": "Mustang",
+      "trim": "fastback",
+      "engine": "305",
+      "year": "1973",
+      "description": "",
+      "annual_mileage": "10000",
+      "mileage": "159087",
+      "id": "BytTo547x"
+    },
+    {
+      "vin": "",
+      "owner": "",
+      "name": "K5",
+      "year": "1984",
+      "make": "Chevy",
+      "model": "Blazer",
+      "trim": "K5",
+      "engine": "305",
+      "description": "K5 blazer with removable top.",
+      "mileage": "20000",
+      "annual_mileage": "2000",
+      "id": "H1_wLIumg"
+    }
+  ],
+  "repairs": [
+    {
+      "id": "R1",
+      "name": "Replace Starter",
+      "done_by": "self",
+      "system": "ignition",
+      "parts": [
+        {
+          "name": "alternator",
+          "from": "Advance Auto",
+          "date": "2016-06-15",
+          "warranty": "lifetime"
+        }
+      ],
+      "vehicle": {
+        "vehicle_id": "V3",
+        "mileage": "3500"
+      },
+      "description": "Replace starter",
+      "status": "completed"
+    },
+    {
+      "id": "R2",
+      "name": "Replace Alternator",
+      "done_by": "self",
+      "system": "ignition",
+      "parts": [
+        {
+          "name": "alternator",
+          "from": "Pep Boys",
+          "date": "2016-11-25",
+          "warranty": "lifetime"
+        },
+        {
+          "name": "surpentine belt",
+          "from": "Pep Boys",
+          "date": "2016-11-25",
+          "warranty": "none"
+        },
+        {
+          "name": "voltage regulator",
+          "from": "Pep Boys",
+          "date": "2016-11-25",
+          "warranty": "none"
+        }
+      ],
+      "vehicle": {
+        "vehicle_id": "V1",
+        "mileage": "130000"
+      },
+      "description": "Replace alternator, belt, and voltage regulator",
+      "status": "completed"
+    },
+    {
+      "id": "R3",
+      "name": "Fix Radio",
+      "done_by": "self",
+      "system": "stereo",
+      "parts": [
+        {}
+      ],
+      "vehicle": {
+        "vehicle_id": "V2",
+        "mileage": "75000"
+      },
+      "description": "Radio not getting power.  Disconnected and reconnected battery.",
+      "status": "completed"
+    },
+    {
+      "name": "Seats",
+      "done_by": "Self",
+      "system": "Interior",
+      "parts": [
+        {
+          "name": "",
+          "from": "",
+          "date": "",
+          "warranty": ""
+        }
+      ],
+      "vehicle": [
+        {
+          "vehicle_id": "",
+          "mileage": ""
+        }
+      ],
+      "description": "Replace seats with Pony upholstery",
+      "status": "Completed",
+      "parts_name": "Seats",
+      "parts_from": "Mustang UL",
+      "parts_date": "2016-02-01",
+      "parts_warranty": "None",
+      "vehicle_id": "V2",
+      "vehicle_mileage": "120000",
+      "engine": "290",
+      "id": "ryfIGcNXl"
+    },
+    {
+      "name": "Patch floor pan",
+      "done_by": "Brian",
+      "system": "Interior",
+      "parts": [
+        {
+          "name": "",
+          "from": "",
+          "date": "",
+          "warranty": ""
+        }
+      ],
+      "vehicle": [
+        {
+          "vehicle_id": "",
+          "mileage": ""
+        }
+      ],
+      "description": "asldkjf",
+      "status": "Complete",
+      "parts_name": "floor pan",
+      "parts_from": "Summit Racing",
+      "parts_date": "2016-09-01",
+      "parts_warranty": "none",
+      "vehicle_id": "V1",
+      "vehicle_mileage": "129000",
+      "engine": "289",
+      "id": "Sk-KBcNml"
+    },
+    {
+      "name": "Replace Power Steering Rack and Pin",
+      "done_by": "Andrea",
+      "system": "Drive Train",
+      "parts": [
+        {
+          "name": "",
+          "from": "",
+          "date": "",
+          "warranty": ""
+        }
+      ],
+      "vehicle": [
+        {
+          "vehicle_id": "",
+          "mileage": ""
+        }
+      ],
+      "description": "Rack and Pin replacement",
+      "status": "To Do",
+      "parts_name": "Power Steering Pump",
+      "parts_from": "O'Reilly's",
+      "parts_date": "2016-12-07",
+      "parts_warranty": "none",
+      "id": "B15Gnq4mx"
+    }
+  ],
+  "services": [
+    {
+      "id": "M1",
+      "name": "Change Oil",
+      "done_by": "self",
+      "materials": [
+        {
+          "name": "Fram Filter PA8",
+          "from": "Pep Boys",
+          "date": "2016-08-25"
+        },
+        {
+          "name": "Penzoil 5-30 oil (7qt)",
+          "from": "Advance Auto",
+          "date": "2016-08-25"
+        }
+      ],
+      "vehicle": {
+        "vehicle_id": "V2",
+        "mileage": "850000"
+      },
+      "description": "Oil Change",
+      "status": "completed"
+    },
+    {
+      "id": "M2",
+      "name": "Change Oil",
+      "done_by": "self",
+      "materials": [
+        {
+          "name": "Fram Filter PA8",
+          "from": "Pep Boys",
+          "date": "2016-11-25"
+        },
+        {
+          "name": "Penzoil 5-30 oil (5qt)",
+          "from": "Pep Boys",
+          "date": "2016-11-25"
+        }
+      ],
+      "vehicle": {
+        "vehicle_id": "V1",
+        "mileage": "128000"
+      },
+      "description": "Oil Change",
+      "status": "completed"
+    },
+    {
+      "id": "M3",
+      "name": "Replace Brake Pads",
+      "done_by": "self",
+      "materials": [
+        {
+          "name": "Brake Pads (front and rear)",
+          "from": "Advance Auto Parts",
+          "date": "2016-08-25"
+        }
+      ],
+      "vehicle": {
+        "vehicle_id": "V1",
+        "mileage": ""
+      },
+      "description": "Brake Pads",
+      "status": "Not Started"
+    },
+    {
+      "vehicle_id": "TestDel",
+      "category_id": "",
+      "name": "",
+      "vehicle_mileage": "",
+      "date": "",
+      "done_by": "",
+      "cost": "",
+      "description": "",
+      "id": "SyGkY_OQx"
+    }
+  ],
+  "categories": [
+    {
+      "id": "maintenance",
+      "name": "maintenance",
+      "descripton": "standard maintenance for vehicle.  Inc. oil change, tire rotation."
+    },
+    {
+      "name": "repair",
+      "description": "repair things that are broken",
+      "id": "repair"
+    },
+    {
+      "name": "Cleaning",
+      "id": "ByP0ILOXl"
+    },
+    {
+      "name": "Repair",
+      "id": "HJz6uLdXl"
+    }
+  ]
+}
