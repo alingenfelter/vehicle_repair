@@ -6,6 +6,7 @@ const textInputStyle = {display: 'block', color: 'gray', background: 'light-gray
 const data = require ('../../utils/data')()
 const TextField = require('../../components/TextField')
 
+
 const ServiceForm = React.createClass({
   getInitialState: function() {
     return {
@@ -21,6 +22,12 @@ const ServiceForm = React.createClass({
         }
       }
   },
+  componentDidMount() {
+    if (this.props.params.id) {
+      data.get('services', this.props.params.id)
+        .then(service => this.setState({service}))
+    }
+  },
   handleChange(field) {
     return (e) => {
       let service = {...this.state.service}
@@ -30,30 +37,15 @@ const ServiceForm = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault()
-    //to store effort value in DB, store value to variable then remove array
-    //could also be handled by changing initial state to place
-    //effort object (inc location_id) and locations array outside effort object.
-    //would require updating render to this.state.effort.field
-    // let vehicle = [].concat(this.state)
-    // const onResult = (e,r) => {
-    //   if (e) return console.log(e.message)
-    //   this.setState({success: true})
-    // }
-    //
-    // if (!vehicle.id) {
-    //   this.props.post(vehicle, onResult)
-    // } else {
-    //   this.props.put(vehicle.id, vehicle, onResult)
-    // }
-    //
-    // if (this.state.id) {
-    //   xhr.put('http://localhost:4000/vehicles/' + this.state.id, {
-    //     json: this.state
-    //   }, (err, response, body) => {
-    //     if (err) return console.log(err.message)
-    //     this.setState({success: true})
-    //   })
-    // } else {
+    if (this.state.service.id) {
+      return data.put('services', this.state.service.id, this.state.service)
+        .then (res => {
+          if (res.id) {
+            this.setState({resolved: true})
+          }
+        })
+    }
+
       data.post('services', this.state.service)
         .then(res => this.setState({resolved: true}))
     //}
@@ -84,46 +76,46 @@ const ServiceForm = React.createClass({
     return (
       <div className='pa4 bg-light-silver'>
       {this.state.resolved ? <Redirect to='/services' /> : null}
-        <h1>{formState} service Form</h1>
+        <h1>{formState} Service Form</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <TextField label='vehicle_id'
+            <TextField label='Vehicle ID'
               value={this.state.vehicle_id}
               onChange={this.handleChange('vehicle_id')}
             />
           </div>
           <div>
-            <TextField label='category_id'
+            <TextField label='Category ID'
               value={this.state.category_id}
               onChange={this.handleChange('category_id')}
             />
           </div>
           <div>
-            <TextField label='name'
+            <TextField label='Service Name'
               value={this.state.name}
               onChange={this.handleChange('name')}
             />
           </div>
           <div>
-            <TextField label='vehicle_mileage'
+            <TextField label='Vehicle Mileage'
               value={this.state.vehicle_mileage}
               onChange={this.handleChange('vehicle_mileage')}
             />
           </div>
           <div>
-            <TextField label='date'
+            <TextField label='Date of Service'
               value={this.state.date}
               onChange={this.handleChange('date')}
             />
           </div>
           <div>
-            <TextField label='done_by'
+            <TextField label='Done By'
               value={this.state.done_by}
               onChange={this.handleChange('done_by')}
             />
           </div>
           <div>
-            <TextField label='cost'
+            <TextField label='Cost'
               value={this.state.cost}
               onChange={this.handleChange('cost')}
             />

@@ -1,5 +1,5 @@
 const React = require('react')
-const { Link } = require('react-router')
+const { Link, Redirect } = require('react-router')
 const data = require ('../../utils/data')()
 
 const Category = React.createClass({
@@ -8,10 +8,7 @@ const Category = React.createClass({
       category: {}
     }
   },
-  componentDidMount() {
-    data.get('categories', this.props.params.id)
-      .then(category => this.setState({category}))
-  },
+
   handleRemove(e) {
       e.preventDefault()
       if (confirm('Are you sure?')) {
@@ -21,11 +18,16 @@ const Category = React.createClass({
 
       }
   },
+  componentDidMount() {
+    data.get('categories', this.props.params.id)
+      .then(category => this.setState({category}))
+  },
   render() {
     const category = this.state.category || {}
+    console.log(this.state.resolved)
     return (
       <div>
-        {this.state.resolved ? <Link to="/categories"/> : null}
+        {this.state.resolved ? <Redirect to="/categories"/> : null}
         <h3>Service Types</h3>
         <h3>{category.name}</h3>
         <p>{category.description}</p>
@@ -33,7 +35,7 @@ const Category = React.createClass({
         |
         <Link to={`/categories/${category.id}/edit`}>Edit Category</Link>
         |
-        <a href="#" onClick={this.handleRemove}>Remove Category</a>
+        <button onClick={this.handleRemove}>Remove</button>
       </div>
     )
   }

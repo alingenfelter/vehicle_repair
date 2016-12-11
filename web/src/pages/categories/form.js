@@ -10,9 +10,16 @@ const CategoryForm = React.createClass({
   getInitialState: function() {
     return {
       category: {
-        "name": ''
+        "name": '',
+        "description": ''
         }
       }
+  },
+  componentDidMount() {
+    if (this.props.params.id) {
+      data.get('categories', this.props.params.id)
+        .then(category => this.setState({category}))
+    }
   },
   handleChange(field) {
     return (e) => {
@@ -23,30 +30,14 @@ const CategoryForm = React.createClass({
   },
   handleSubmit(e) {
     e.preventDefault()
-    //to store effort value in DB, store value to variable then remove array
-    //could also be handled by changing initial state to place
-    //effort object (inc location_id) and locations array outside effort object.
-    //would require updating render to this.state.effort.field
-    // let category = [].concat(this.state)
-    // const onResult = (e,r) => {
-    //   if (e) return console.log(e.message)
-    //   this.setState({success: true})
-    // }
-    //
-    // if (!category.id) {
-    //   this.props.post(category, onResult)
-    // } else {
-    //   this.props.put(category.id, category, onResult)
-    // }
-    //
-    // if (this.state.id) {
-    //   xhr.put('http://localhost:4000/categories/' + this.state.id, {
-    //     json: this.state
-    //   }, (err, response, body) => {
-    //     if (err) return console.log(err.message)
-    //     this.setState({success: true})
-    //   })
-    // } else {
+    if (this.state.category.id) {
+      return data.put('categories', this.state.category.id, this.state.category)
+        .then (res => {
+          if (res.id) {
+            this.setState({resolved: true})
+          }
+        })
+    }
       data.post('categories', this.state.category)
         .then(res => this.setState({resolved: true}))
     //}
@@ -80,12 +71,17 @@ const CategoryForm = React.createClass({
         <h1>{formState} Category Form</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <TextField label='name'
-              value={this.state.name}
+            <TextField label='Category Name'
+              value={this.state.category.name}
               onChange={this.handleChange('name')}
             />
           </div>
-
+          <div>
+            <TextField label='Category Description'
+              value={this.state.category.description}
+              onChange={this.handleChange('description')}
+            />
+          </div>
             <div>
               <div>
                   <button onClick={this.handleSubmit} className='br2 bg-white pa2 mt2 mr2 fl'>Save</button>

@@ -4,7 +4,6 @@ const labelStyle = { display: 'block', color: 'red' }
 const inputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '30px'}
 const textInputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '120px'}
 const data = require ('../../utils/data')()
-
 const TextField = require('../../components/TextField')
 
 const VehicleForm = React.createClass({
@@ -103,57 +102,45 @@ const VehicleForm = React.createClass({
         <h1>{formState} Vehicle Form</h1>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <TextField label='name'
+            <TextField label='Vehicle Name'
               value={this.state.vehicle.name}
               onChange={this.handleChange('name')}
             />
           </div>
           <div>
-            <TextField label='vin'
+            <TextField label='VIN'
               value={this.state.vehicle.vin}
               onChange={this.handleChange('vin')}
             />
           </div>
           <div>
-            <TextField label='make'
+            <TextField label='Make'
               value={this.state.make}
               onChange={this.handleChange('make')}
             />
           </div>
           <div>
-            <TextField label='model'
+            <TextField label='Model'
               value={this.state.model}
               onChange={this.handleChange('model')}
             />
             </div>
             <div>
-              <TextField label='trim'
+              <TextField label='Trim'
                 value={this.state.trim}
                 onChange={this.handleChange('trim')}
               />
             </div>
             <div>
-              <TextField label='year'
+              <TextField label='Year'
                 value={this.state.year}
                 onChange={this.handleChange('year')}
               />
             </div>
             <div>
-              <TextField label='engine'
+              <TextField label='Engine'
                 value={this.state.engine}
                 onChange={this.handleChange('engine')}
-              />
-            </div>
-            <div>
-              <TextField label='mileage'
-                value={this.state.mileage}
-                onChange={this.handleChange('mileage')}
-              />
-            </div>
-            <div>
-              <TextField label='annual_mileage'
-                value={this.state.annual_mileage}
-                onChange={this.handleChange('annual_mileage')}
               />
             </div>
             <div>
@@ -163,8 +150,6 @@ const VehicleForm = React.createClass({
                 value={this.state.description}
                 type="text" />
             </div>
-
-
             <div>
               <div>
                   <button onClick={this.handleSubmit} className='br2 bg-white pa2 mt2 mr2 fl'>Save</button>

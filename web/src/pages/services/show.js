@@ -1,5 +1,5 @@
 const React = require('react')
-const { Link } = require('react-router')
+const { Link, Redirect } = require('react-router')
 const data = require ('../../utils/data')()
 
 const Service = React.createClass({
