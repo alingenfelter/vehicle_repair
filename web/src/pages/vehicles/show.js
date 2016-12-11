@@ -1,5 +1,5 @@
 const React = require('react')
-const { Link } = require('react-router')
+const { Link, Redirect } = require('react-router')
 const data = require ('../../utils/data')()
 
 const Vehicle = React.createClass({
@@ -23,7 +23,6 @@ const Vehicle = React.createClass({
 
   },
   render() {
-    console.log('vehicle: ', this.state.vehicle)
     const vehicle = this.state.vehicle || {}
     return (
       <div>

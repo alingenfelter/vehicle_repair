@@ -12,7 +12,7 @@ const Vehicles = React.createClass({
   },
   componentDidMount() {
     data.list('vehicles')
-      .then(result => pluck('doc', result.rows))
+      //.then(result => pluck('doc', result.rows))
       .then(vehicles => this.setState({vehicles}))
   },
   render() {

@@ -79,7 +79,7 @@ const ServiceForm = React.createClass({
   // },
   render() {
 
-    const formState = this.state.id ? 'Edit' : 'New'
+    const formState = this.state.service.id ? 'Edit' : 'New'
     //console.log(this.state.locations)
     return (
       <div className='pa4 bg-light-silver'>

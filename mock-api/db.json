@@ -2,15 +2,16 @@
   "vehicles": [
     {
       "id": "V1",
-      "name": "Lucy",
-      "make": "Ford",
-      "model": "Mustang",
-      "trim": "coup",
-      "engine": "289",
-      "year": "1965",
-      "description": "4 barrell 289. C vin.",
-      "annual_mileage": "1000",
-      "mileage": "130500"
+      "type": "vehicle",
+      "vin": "6F07C1100888",
+      "owner": "Andrea",
+      "name": "Space Coupe",
+      "year": "2007",
+      "make": "Pontiac",
+      "model": "G6",
+      "trim": "GT",
+      "engine": "V6",
+      "description": "Black with chrome rims, leased"
     },
     {
       "id": "V3",
@@ -229,29 +230,6 @@
       "status": "completed"
     },
     {
-      "id": "M2",
-      "name": "Change Oil",
-      "done_by": "self",
-      "materials": [
-        {
-          "name": "Fram Filter PA8",
-          "from": "Pep Boys",
-          "date": "2016-11-25"
-        },
-        {
-          "name": "Penzoil 5-30 oil (5qt)",
-          "from": "Pep Boys",
-          "date": "2016-11-25"
-        }
-      ],
-      "vehicle": {
-        "vehicle_id": "V1",
-        "mileage": "128000"
-      },
-      "description": "Oil Change",
-      "status": "completed"
-    },
-    {
       "id": "M3",
       "name": "Replace Brake Pads",
       "done_by": "self",
@@ -279,6 +257,28 @@
       "cost": "",
       "description": "",
       "id": "SyGkY_OQx"
+    },
+    {
+      "vehicle_id": "H1_wLIumg",
+      "category_id": "Body Work",
+      "name": "Fix bumper",
+      "vehicle_mileage": "35800",
+      "date": "2009-10-05",
+      "done_by": "Amherst Auto Body",
+      "cost": "1000",
+      "description": "Repair body damage from wreck",
+      "id": "rJjZzntmx"
+    },
+    {
+      "vehicle_id": "V1",
+      "category_id": "Maintenance",
+      "name": "Change Coolant",
+      "vehicle_mileage": "24000",
+      "date": "20080101",
+      "done_by": "Andrea",
+      "cost": "50.00",
+      "description": "",
+      "id": "B1skXntQe"
     }
   ],
   "categories": [
@@ -288,17 +288,20 @@
       "descripton": "standard maintenance for vehicle.  Inc. oil change, tire rotation."
     },
     {
-      "name": "repair",
-      "description": "repair things that are broken",
-      "id": "repair"
-    },
-    {
       "name": "Cleaning",
       "id": "ByP0ILOXl"
     },
     {
       "name": "Repair",
       "id": "HJz6uLdXl"
+    },
+    {
+      "name": "Maintenance",
+      "id": "S1vXN3t7e"
+    },
+    {
+      "name": "body",
+      "id": "SyiGN3KQe"
     }
   ]
 }

@@ -95,7 +95,7 @@ const VehicleForm = React.createClass({
   //   }
   // },
   render() {
-    const formState = this.state.id ? 'Edit' : 'New'
+    const formState = this.state.vehicle.id ? 'Edit' : 'New'
     //console.log(this.state.locations)
     return (
       <div className='pa4 bg-light-silver'>
@@ -106,6 +106,12 @@ const VehicleForm = React.createClass({
             <TextField label='name'
               value={this.state.vehicle.name}
               onChange={this.handleChange('name')}
+            />
+          </div>
+          <div>
+            <TextField label='vin'
+              value={this.state.vehicle.vin}
+              onChange={this.handleChange('vin')}
             />
           </div>
           <div>

@@ -3,6 +3,8 @@ const PouchDB = require('pouchdb-http')
 PouchDB.plugin(require('pouchdb-mapreduce'))
 PouchDB.plugin(require('pouchdb-find'))
 PouchDB.debug.enable('pouchdb:find')
+
+const {pluck} = require('ramda')
 // const fetchConfig = require('zero-config')
 //
 // var config = fetchConfig(path.join(__dirname, '..'), {dcValue: 'test'})
@@ -34,6 +36,7 @@ const dal = {
 
 function createVehicle(data, cb) {
     data._id = "vehicle_" + data.vin
+    data.id = "vehicle_" + data.vin
     data.type = "vehicle"
     db.put(data, function(err, response) {
         if (err) {
@@ -61,7 +64,8 @@ function getVehicles(data, cb) {
 }
 
 function createService(data, cb) {
-    data._id = data.vehicleID + "_service_" + data.categoryID + '_' + data.date
+    data._id = data.vehicle_id + "_service_" + data.category_id + '_' + data.date
+    data.id = data.vehicle_id + "_service_" + data.category_id + '_' + data.date
     data.type = "service"
     db.put(data, function(err, response) {
         if (err) {
@@ -91,6 +95,7 @@ function getServices(data, cb) {
 
 function createCategory(data, cb) {
     data._id = data.name
+    data.id = data.name
     data.type = "category"
 
     db.put(data, function(err, response) {
@@ -201,7 +206,9 @@ function listDocsByType(data, cb) {
     db.query(data, {include_docs: true})
     .then(function(result) {
         console.log("results: ", result)
-        return cb(null, result)
+        const docs = pluck('doc',result.rows)
+        console.log("plucked!: ", docs)
+        return cb(null, docs)
     }).catch(function(err) {
         console.log("err: ", err)
         return cb(err)

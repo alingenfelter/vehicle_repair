@@ -170,7 +170,7 @@ app.delete('/vehicles/:id', function(req, res, next) {
     })
 
    app.post('/categories', function(req, res, next) {
-        dal.createCategories(req.body, function(err, result) {
+        dal.createCategory(req.body, function(err, result) {
             if (err) {
                 var responseError = BuildResponseError(err)
                 return next(new HTTPError(responseError.status, responseError.message))
