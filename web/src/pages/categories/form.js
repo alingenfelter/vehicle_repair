@@ -1,10 +1,14 @@
 const React = require('react')
 const {Link, Redirect} = require('react-router')
-const labelStyle = { display: 'block', color: 'red' }
-const inputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '30px'}
-const textInputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '120px'}
+const labelStyle = { display: 'block' }
+// const inputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '30px'}
+// const textInputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '120px'}
 const data = require ('../../utils/data')()
-const TextField = require('../../components/TextField')
+//const TextField = require('../../components/TextField')
+const PageHeader = require('../../components/Header')
+const PageFooter = require('../../components/Footer')
+const { FormGroup, FormControl, ControlLabel, Button } = require('react-bootstrap')
+
 
 const CategoryForm = React.createClass({
   getInitialState: function() {
@@ -42,90 +46,49 @@ const CategoryForm = React.createClass({
         .then(res => this.setState({resolved: true}))
     //}
   },
-  // componentDidMount() {
-  //   //add to get locations
-  //   // xhr(process.env.REACT_APP_API + '/locations', {
-  //   //   json: true
-  //   // }, (err, res, body) => {
-  //   //   //console.log(body)
-  //   //   if (err) return console.log(err.message)
-  //   //   this.setState({locations:
-  //   //     [].concat(this.state.locations,body)
-  //   //   })
-  //   // })
-  //   if (this.props.params.id) {
-  //     xhr.get('http://localhost:4000/categories/' + this.props.params.id,
-  //       {json: true}, (err, res, category) => {
-  //         if (err) return console.log(err.message)
-  //         this.setState(category)
-  //       })
-  //   }
-  // },
+
   render() {
 
     const formState = this.state.category.id ? 'Edit' : 'New'
     //console.log(this.state.locations)
     return (
-      <container className='h-100 w-100'>
-        <div className='pa4 bg-light-silver'>
+      <div className=' pa4 bg-light-silver'>
+        <div>
         {this.state.resolved ? <Redirect to='/categories' /> : null}
-        <div className="navbar-wrapper">
-      <div className="container">
-        <nav className="navbar navbar-inverse navbar-static-top">
-          <div className="container">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-              <a className="navbar-brand" href="#">Vehicle Repair Record</a>
-            </div>
-            <div id="navbar" className="navbar-collapse collapse">
-              <ul className="nav navbar-nav">
-                <li ><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </div>
-          <h1>{formState} Category Form</h1>
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <TextField label='Category Name'
+        <PageHeader />
+        <article className='mw7 mw8-ns center pt4'>
+        <form onSubmit={this.handleSubmit} className='pa4 w-80 mw6 m-auto bg-light-gray'>
+            <h2>{formState} Category Form</h2>
+            <FormGroup>
+            <ControlLabel style={labelStyle}>Service Category</ControlLabel>
+              <FormControl
                 value={this.state.category.name}
                 onChange={this.handleChange('name')}
+                type='text'
               />
-            </div>
-            <div>
-              <TextField label='Category Description'
+            </FormGroup>
+            <FormGroup>
+            <ControlLabel style={labelStyle}>Category Description</ControlLabel>
+              <FormControl
                 value={this.state.category.description}
                 onChange={this.handleChange('description')}
+                type='text'
               />
-            </div>
+            </FormGroup>
               <div>
                 <div>
-                    <button onClick={this.handleSubmit} className='br2 bg-white pa2 mt2 mr2 fl'>Save</button>
+                    <Button onClick={this.handleSubmit} className='br2 bg-white pa2 mt2 mr2 fl'>Save</Button>
                   </div>
-                <div className='br2 bg-white pa2 mt2 mr2 dib'>
-                  <Link to="/categories">Cancel</Link>
+                <div>
+                  <Button className='br2 bg-white pa2 mt2 mr2 fl'><Link to="/categories">Cancel</Link></Button>
                 </div>
+                <br /><br />
               </div>
             </form>
+            </article>
         </div>
-        <footer className="tc-l bg-center cover">
-        <div className="w-100 ph3 pv5 bg-black">
-          <a className="link white-60 bg-transparent hover-white inline-flex items-center ma2 tc br2 pa2">
-          alingenfelter &middot;
-          <a href="https://linkedin.com/in/andrealingenfelter">LinkedIn</a> &middot;
-          <a href="https://github.com/alingenfelter">GitHub
-          </a></a>
-        </div>
-        </footer>
-      </container>
+        <PageFooter />
+      </div>
     )
   }
 })

@@ -1,8 +1,11 @@
 const React = require('react')
 const { Link } = require('react-router')
 const data = require ('../../utils/data')()
-const {pluck} = require('ramda')
+// const {pluck} = require('ramda')
 const vehicleItem = require('./item')
+const PageHeader = require('../../components/Header')
+const PageFooter = require('../../components/Footer')
+const { Button } = require('react-bootstrap')
 
 const Vehicles = React.createClass({
   getInitialState: function() {
@@ -18,53 +21,20 @@ const Vehicles = React.createClass({
   render() {
 
     return (
-      <div className='tc pa4 bg-light-gray'>
-      <div className="navbar-wrapper">
-    <div className="container">
-      <nav className="navbar navbar-inverse navbar-static-top">
-        <div className="container">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">Vehicle Repair Record</a>
-          </div>
-          <div id="navbar" className="navbar-collapse collapse">
-            <ul className="nav navbar-nav">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About</a></li>
-            </ul>
-          </div>
+      <container className='h-100'>
+        <div className='tc bg-light-gray pa4 h-100'>
+          <PageHeader />
+            <div>
+              <h3>Vehicles</h3>
+              <ul className='list pl0'>
+                {this.state.vehicles.map(vehicleItem)}
+              </ul>
+              <Button className='fr pa2'><Link to="/vehicles/new">Add New Vehicle</Link></Button>
+            </div>
+            <br /><br />
+          <PageFooter />
         </div>
-      </nav>
-    </div>
-  </div>
-        <header>
-          <nav>
-            <Link to="/vehicles/new">Add New Vehicle</Link>
-            |
-            <Link to="/">Home</Link>
-          </nav>
-          <h3>Vehicles</h3>
-        </header>
-        <main>
-          <ul>
-            {this.state.vehicles.map(vehicleItem)}
-          </ul>
-        </main>
-        <footer className="tc-l bg-center cover">
-        <div className="w-100 ph3 pv5 bg-black">
-          <a className="link white-60 bg-transparent hover-white inline-flex items-center ma2 tc br2 pa2">
-          alingenfelter &middot;
-          <a href="https://linkedin.com/in/andrealingenfelter">LinkedIn</a> &middot;
-          <a href="https://github.com/alingenfelter">GitHub
-          </a></a>
-        </div>
-        </footer>
-      </div>
+      </container>
     )
   }
 })

@@ -2,7 +2,7 @@ const React = require('react')
 
 const TextField = React.createClass({
   render () {
-    const labelStyle = {display: 'block', color: 'green'}
+    const labelStyle = {display: 'block', color: 'navy', padding: '2px'}
 
     return (
       <div>

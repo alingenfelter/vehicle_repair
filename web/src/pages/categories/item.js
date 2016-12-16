@@ -3,6 +3,6 @@ const {Link} = require('react-router')
 module.exports = category =>
   <li key={category.id}>
     <Link to={`/categories/${category.id}/show`}>
-      {category.name}
+      {category.name}: {category.description}
     </Link>
   </li>

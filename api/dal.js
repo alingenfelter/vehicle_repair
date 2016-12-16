@@ -10,7 +10,7 @@ const {pluck} = require('ramda')
 // var config = fetchConfig(path.join(__dirname, '..'), {dcValue: 'test'})
 // const urlFormat = require('url').format
 
-const db =new PouchDB('http://localhost:5984/vehicle_repair');
+const db =new PouchDB('https://lytorcherestiounderstres:758abd2e31c53501231f4f5900996632a6b4442b@alingenfelter.cloudant.com/vehiclerepairrecord');
 
 const dal = {
   createVehicle: createVehicle,

@@ -1,10 +1,14 @@
 const React = require('react')
 const {Link, Redirect} = require('react-router')
-const labelStyle = { display: 'block', color: 'red' }
-const inputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '30px'}
-const textInputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '120px'}
+const labelStyle = { display: 'block' }
+//const inputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '30px'}
+//const textInputStyle = {display: 'block', color: 'gray', background: 'light-gray', width: '200px', height: '120px'}
 const data = require ('../../utils/data')()
-const TextField = require('../../components/TextField')
+//const TextField = require('../../components/TextField')
+const PageHeader = require('../../components/Header')
+const PageFooter = require('../../components/Footer')
+const { FormGroup, FormControl, ControlLabel, Button } = require('react-bootstrap')
+
 
 const VehicleForm = React.createClass({
   getInitialState: function() {
@@ -45,152 +49,106 @@ const VehicleForm = React.createClass({
           }
         })
     }
-
-    //to store effort value in DB, store value to variable then remove array
-    //could also be handled by changing initial state to place
-    //effort object (inc location_id) and locations array outside effort object.
-    //would require updating render to this.state.effort.field
-    // let vehicle = [].concat(this.state)
-    // const onResult = (e,r) => {
-    //   if (e) return console.log(e.message)
-    //   this.setState({success: true})
-    // }
-    //
-    // if (!vehicle.id) {
-    //   this.props.post(vehicle, onResult)
-    // } else {
-    //   this.props.put(vehicle.id, vehicle, onResult)
-    // }
-    //
-    // if (this.state.id) {
-    //   xhr.put('http://localhost:4000/vehicles/' + this.state.id, {
-    //     json: this.state
-    //   }, (err, response, body) => {
-    //     if (err) return console.log(err.message)
-    //     this.setState({success: true})
-    //   })
-    // } else {
       data.post('vehicles', this.state.vehicle)
         .then(res => this.setState({resolved: true}))
-    //}
+
   },
-  // componentDidMount() {
-  //   //add to get locations
-  //   // xhr(process.env.REACT_APP_API + '/locations', {
-  //   //   json: true
-  //   // }, (err, res, body) => {
-  //   //   //console.log(body)
-  //   //   if (err) return console.log(err.message)
-  //   //   this.setState({locations:
-  //   //     [].concat(this.state.locations,body)
-  //   //   })
-  //   // })
-  //   //if (this.props.params.id) {
-  //     xhr.get('http://localhost:4000/vehicles/' + this.props.params.id,
-  //       {json: true}, (err, res, vehicle) => {
-  //         if (err) return console.log(err.message)
-  //         this.setState(vehicle)
-  //       })
-  //   }
-  // },
+
   render() {
     const formState = this.state.vehicle.id ? 'Edit' : 'New'
     //console.log(this.state.locations)
     return (
-      <div className='pa4 bg-light-silver'>
+      <div className='bg-light-silver pa4'>
       {this.state.resolved ? <Redirect to='/vehicles' /> : null}
-      <div className="navbar-wrapper">
-    <div className="container">
-      <nav className="navbar navbar-inverse navbar-static-top">
-        <div className="container">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">Vehicle Repair Record</a>
-          </div>
-          <div id="navbar" className="navbar-collapse collapse">
-            <ul className="nav navbar-nav">
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </div>
-        <h1>{formState} Vehicle Form</h1>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <TextField label='Vehicle Name'
+      <PageHeader />
+      <article className='mw7 mw8-ns center pt4'>
+      <form onSubmit={this.handleSubmit} className='pa4 w-80 m-auto bg-light-gray'>
+        <h2>{formState} Vehicle Form</h2>
+
+          <FormGroup>
+            <ControlLabel style={labelStyle}>Vehicle Name</ControlLabel>
+            <FormControl
               value={this.state.vehicle.name}
               onChange={this.handleChange('name')}
+              type='text'
             />
-          </div>
-          <div>
-            <TextField label='VIN'
+          </FormGroup>
+
+          <FormGroup>
+            <ControlLabel style={labelStyle}>Vehicle VIN</ControlLabel>
+            <FormControl
               value={this.state.vehicle.vin}
               onChange={this.handleChange('vin')}
+              type='text'
             />
-          </div>
-          <div>
-            <TextField label='Make'
-              value={this.state.make}
+          </FormGroup>
+
+          <FormGroup>
+            <ControlLabel style={labelStyle}>Vehicle Year</ControlLabel>
+            <FormControl
+              value={this.state.vehicle.year}
+              onChange={this.handleChange('year')}
+              type='text'
+            />
+          </FormGroup>
+
+          <FormGroup>
+            <ControlLabel style={labelStyle}>Vehicle Make</ControlLabel>
+            <FormControl
+              value={this.state.vehicle.make}
               onChange={this.handleChange('make')}
+              type='text'
             />
-          </div>
-          <div>
-            <TextField label='Model'
-              value={this.state.model}
+          </FormGroup>
+
+          <FormGroup>
+            <ControlLabel style={labelStyle}>Vehicle Model</ControlLabel>
+            <FormControl
+              value={this.state.vehicle.model}
               onChange={this.handleChange('model')}
+              type='text'
             />
-            </div>
-            <div>
-              <TextField label='Trim'
-                value={this.state.trim}
+            </FormGroup>
+
+            <FormGroup>
+              <ControlLabel style={labelStyle}>Vehicle Trim</ControlLabel>
+              <FormControl
+                value={this.state.vehicle.trim}
                 onChange={this.handleChange('trim')}
+                type='text'
               />
-            </div>
-            <div>
-              <TextField label='Year'
-                value={this.state.year}
-                onChange={this.handleChange('year')}
-              />
-            </div>
-            <div>
-              <TextField label='Engine'
-                value={this.state.engine}
+            </FormGroup>
+
+            <FormGroup>
+              <ControlLabel style={labelStyle}>Vehicle Engine</ControlLabel>
+              <FormControl
+                value={this.state.vehicle.engine}
                 onChange={this.handleChange('engine')}
+                type='text'
               />
-            </div>
-            <div>
-              <label style={labelStyle}>Description</label>
-              <textarea style={textInputStyle}
+            </FormGroup>
+
+            <FormGroup>
+              <ControlLabel style={labelStyle}>Vehicle Description</ControlLabel>
+              <FormControl
                 onChange={this.handleChange('description')}
-                value={this.state.description}
-                type="text" />
-            </div>
+                value={this.state.vehicle.description}
+                type="text"
+                />
+            </FormGroup>
+
             <div>
               <div>
-                  <button onClick={this.handleSubmit} className='br2 bg-white pa2 mt2 mr2 fl'>Save</button>
-                </div>
-              <div className='br2 bg-white pa2 mt2 mr2 dib'>
-                <Link to="/vehicles">Cancel</Link>
+                <Button onClick={this.handleSubmit} className='btn btn-primary fl-l ma2'>Save</Button>
               </div>
+              <div className='br2 bg-white mt2  dib w4 black'>
+                <Button className='btn btn-default> fl-l'><Link to="/vehicles">Cancel</Link></Button>
+              </div>
+
             </div>
           </form>
-          <footer className="tc-l bg-center cover">
-          <div className="w-100 ph3 pv5 bg-black">
-            <a className="link white-60 bg-transparent hover-white inline-flex items-center ma2 tc br2 pa2">
-            alingenfelter &middot;
-            <a href="https://linkedin.com/in/andrealingenfelter">LinkedIn</a> &middot;
-            <a href="https://github.com/alingenfelter">GitHub
-            </a></a>
-          </div>
-          </footer>
+          </article>
+          <PageFooter />
       </div>
     )
   }

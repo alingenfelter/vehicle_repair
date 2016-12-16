@@ -1,13 +1,27 @@
 const React = require('react')
 const { Link, Redirect } = require('react-router')
 const data = require ('../../utils/data')()
+const PageHeader = require('../../components/Header')
+const PageFooter = require('../../components/Footer')
+const { Button } = require('react-bootstrap')
 
 const Vehicle = React.createClass({
   getInitialState: function() {
     return {
-      vehicle: {}
+      services: [],
+      vehicle: {},
+
     }
   },
+
+  componentDidMount() {
+    data.get('vehicles',  this.props.params.id)
+      .then(vehicle => this.setState({vehicle}))
+    data.list('services')
+      .then(services => services.filter(service => service.vehicle_id === this.props.params.id ))
+      .then(services => this.setState({services}))
+  },
+
   handleRemove(e) {
       e.preventDefault()
       if (confirm('Are you sure?')) {
@@ -17,61 +31,54 @@ const Vehicle = React.createClass({
 
       }
   },
-  componentDidMount() {
-    data.get('vehicles',  this.props.params.id)
-      .then(vehicle => this.setState({vehicle}))
-
-  },
   render() {
+    const record = service =>
+      <tr key={service.id}>
+        <td>{service.name}</td>
+        <td>{service.date}</td>
+        <td>{service.done_by}</td>
+        <td>{service.description}</td>
+      </tr>
     const vehicle = this.state.vehicle || {}
     return (
-      <container>
-        <div className='tc pa4 bg-light-gray'>
-        <div className="navbar-wrapper">
-      <div className="container">
-        <nav className="navbar navbar-inverse navbar-static-top">
-          <div className="container">
-            <div className="navbar-header">
-              <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span className="sr-only">Toggle navigation</span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-                <span className="icon-bar"></span>
-              </button>
-              <a className="navbar-brand" href="#">Vehicle Repair Record</a>
-            </div>
-            <div id="navbar" className="navbar-collapse collapse">
-              <ul className="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+      <div className='tc bg-light-gray pa4'>
+      <div>
+      <PageHeader />
+        {this.state.resolved ? <Redirect to='/vehicles' /> : null}
+        <h3>Vehicle Detail</h3>
+        <h3>{vehicle.name}</h3>
+        <p>{vehicle.year} {vehicle.make} {vehicle.model}</p>
+        <p>{vehicle.trim} with a {vehicle.engine}</p>
+        <p>{vehicle.description}</p>
+        <Button className='ma2'><Link to="/vehicles">Back to Vehicles</Link></Button>
+
+        <Button className='ma2'><Link to={`/vehicles/${vehicle.id}/edit`}>Edit Vehicle</Link></Button>
+
+        {/* <Link to="/services/new">Add New service</Link> */}
+        <Button className='ma2'><Link to={`/services/new/vehcile_id=${this.state.vehicle.id}`}>Add New Service</Link></Button>
+
+        <Button className='ma2' onClick={this.handleRemove}>Remove Vehicle</Button>
+        <br /><br />
       </div>
-    </div>
-          {this.state.resolved ? <Redirect to='/vehicles' /> : null}
-          <h3>Vehicle Detail</h3>
-          <h3>{vehicle.name}</h3>
-          <p>{vehicle.year} {vehicle.make} {vehicle.model}</p>
-          <p>{vehicle.trim} with a {vehicle.engine}</p>
-          <p>{vehicle.description}</p>
-          <Link to="/vehicles">Vehicles</Link>
-          |
-          <Link to={`/vehicles/${vehicle.id}/edit`}>Edit Vehicle</Link>
-          |
-          <button onClick={this.handleRemove}>Remove</button>
-        </div>
-        <footer className="tc-l bg-center cover">
-        <div className="w-100 ph3 pv5 bg-black">
-          <a className="link white-60 bg-transparent hover-white inline-flex items-center ma2 tc br2 pa2">
-          alingenfelter &middot;
-          <a href="https://linkedin.com/in/andrealingenfelter">LinkedIn</a> &middot;
-          <a href="https://github.com/alingenfelter">GitHub
-          </a></a>
-        </div>
-        </footer>
-      </container>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              {/* <td><Link to={`/services/${service.id}/show`}> Service Name</Link></td> */}
+              <td>Service Name</td>
+              <td>Service Date</td>
+              <td>Done By</td>
+              <td>Service Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.services.map(record)}
+          </tbody>
+        </table>
+      </div>
+      <PageFooter />
+      </div>
+
     )
   }
 })
